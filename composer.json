@@ -1,0 +1,37 @@
+{
+  "name": "carlonicora/minimalism-service-twig",
+  "description": "Twig transformer for Minimalism 12",
+  "version": "1.0.0",
+  "homepage": "https://carlonicora.com",
+  "time": "2020-12-29",
+  "type": "project",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Carlo Nicora",
+      "email": "carlo@phlow.com",
+      "homepage": "http://phlow.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "carlonicora/minimalism": "v12.x-dev"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "CarloNicora\\Minimalism\\Services\\Twig\\":"src/"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": "bash vendor/bin/minimalism-post-install.sh"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/carlonicora/minimalism.git"
+    }
+  ]
+}
