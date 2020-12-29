@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "homepage": "https://carlonicora.com",
   "time": "2020-12-29",
-  "type": "project",
+  "type": "library",
   "minimum-stability": "dev",
   "authors": [
     {
@@ -15,7 +15,8 @@
     }
   ],
   "require": {
-    "carlonicora/minimalism": "v12.x-dev"
+    "carlonicora/minimalism": "v12.x-dev",
+    "twig/twig":"~2.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
@@ -24,9 +25,6 @@
     "psr-4": {
       "CarloNicora\\Minimalism\\Services\\Twig\\":"src/"
     }
-  },
-  "scripts": {
-    "post-install-cmd": "bash vendor/bin/minimalism-post-install.sh"
   },
   "repositories": [
     {
