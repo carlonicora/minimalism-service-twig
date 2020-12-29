@@ -41,16 +41,14 @@ class Twig implements ServiceInterface, TransformerInterface
             $paths[] = $defaultDirectory;
         }
 
-        /*
-        foreach ($this->services->paths()->getServicesViewsDirectories() as $additionalPaths) {
+        foreach ($this->path->getServicesViewsDirectories() ?? [] as $additionalPaths) {
             $paths[] = $additionalPaths;
         }
-        */
 
         $twigLoader = new FilesystemLoader($paths);
-        $environment = new Environment($twigLoader);
-
-        return $environment->render($viewFile . '.twig', $document->prepare());
+        $twig = new Environment($twigLoader);
+        $template = $twig->load($viewFile . '.twig');
+        return $template->render($document->prepare());
     }
 
     /**

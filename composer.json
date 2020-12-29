@@ -5,7 +5,7 @@
   "homepage": "https://carlonicora.com",
   "time": "2020-12-29",
   "type": "library",
-  "minimum-stability": "dev",
+  "minimum-stability": "beta",
   "authors": [
     {
       "name": "Carlo Nicora",
@@ -15,8 +15,8 @@
     }
   ],
   "require": {
-    "carlonicora/minimalism": "v12.x-dev",
-    "twig/twig":"v3.0.5"
+    "carlonicora/minimalism": "~12.0",
+    "twig/twig":"~3.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
@@ -25,11 +25,5 @@
     "psr-4": {
       "CarloNicora\\Minimalism\\Services\\Twig\\":"src/"
     }
-  },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/carlonicora/minimalism.git"
-    }
-  ]
+  }
 }
