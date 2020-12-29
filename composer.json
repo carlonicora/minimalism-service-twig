@@ -16,7 +16,7 @@
   ],
   "require": {
     "carlonicora/minimalism": "v12.x-dev",
-    "twig/twig":"v3.0.5"
+    "twig/twig":"v2.14.1"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"
