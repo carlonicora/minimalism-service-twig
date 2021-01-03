@@ -6,16 +6,34 @@ use CarloNicora\Minimalism\Interfaces\ServiceInterface;
 use CarloNicora\Minimalism\Interfaces\TransformerInterface;
 use CarloNicora\Minimalism\Services\Path;
 use Exception;
+use RuntimeException;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 class Twig implements ServiceInterface, TransformerInterface
 {
+    /** @var string  */
+    private string $twigCache;
+
     /**
      * Twig constructor.
      * @param Path $path
      */
-    public function __construct(private Path $path) {}
+    public function __construct(
+        private Path $path
+    ) {
+        $this->twigCache = $this->path->getRoot()
+            . DIRECTORY_SEPARATOR
+            . 'data'
+            . DIRECTORY_SEPARATOR
+            . 'cache'
+            . DIRECTORY_SEPARATOR
+            . 'twig';
+
+        if (!file_exists($this->twigCache) && !mkdir($this->twigCache) && !is_dir($this->twigCache)) {
+            throw new RuntimeException('Cannot create twig cache directory', 500);
+        }
+    }
 
     /**
      *
@@ -46,7 +64,9 @@ class Twig implements ServiceInterface, TransformerInterface
         }
 
         $twigLoader = new FilesystemLoader($paths);
-        $twig = new Environment($twigLoader);
+        $twig = new Environment($twigLoader, [
+            'cache' => $this->twigCache,
+        ]);
         $template = $twig->load($viewFile . '.twig');
         return $template->render($document->prepare());
     }
