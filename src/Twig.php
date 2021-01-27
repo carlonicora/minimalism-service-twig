@@ -30,9 +30,13 @@ class Twig implements ServiceInterface, TransformerInterface
             . DIRECTORY_SEPARATOR
             . 'twig';
 
-        if (!file_exists($this->twigCache) && !mkdir($this->twigCache) && !is_dir($this->twigCache)) {
+        $defaultMask = umask(0);
+
+        if (!file_exists($this->twigCache) && !mkdir($this->twigCache, 0777) && !is_dir($this->twigCache)) {
             throw new RuntimeException('Cannot create twig cache directory', 500);
         }
+        umask($defaultMask);
+
     }
 
     /**

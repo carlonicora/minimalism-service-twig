@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/minimalism-service-twig",
   "description": "Twig transformer for Minimalism 12",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://carlonicora.com",
   "time": "2020-12-29",
   "type": "library",
