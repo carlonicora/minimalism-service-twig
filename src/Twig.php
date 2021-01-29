@@ -23,12 +23,8 @@ class Twig implements ServiceInterface, TransformerInterface
         private Path $path
     ) {
         $this->twigCache = $this->path->getRoot()
-            . DIRECTORY_SEPARATOR
-            . 'data'
-            . DIRECTORY_SEPARATOR
-            . 'cache'
-            . DIRECTORY_SEPARATOR
-            . 'twig';
+            . DIRECTORY_SEPARATOR . 'cache'
+            . DIRECTORY_SEPARATOR . 'twig';
 
         $defaultMask = umask(0);
 
