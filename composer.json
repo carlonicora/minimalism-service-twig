@@ -1,22 +1,23 @@
 {
   "name": "carlonicora/minimalism-service-twig",
   "description": "Twig transformer for Minimalism 12",
-  "version": "1.0.5",
+  "version": "2.0.0-alpha1",
   "homepage": "https://carlonicora.com",
   "time": "2020-12-29",
   "type": "library",
-  "minimum-stability": "beta",
+  "minimum-stability": "alpha",
   "authors": [
     {
       "name": "Carlo Nicora",
-      "email": "carlo@phlow.com",
-      "homepage": "http://phlow.com",
+      "email": "carlo@carlonicora.com",
+      "homepage": "http://carlonicora.com",
       "role": "Developer"
     }
   ],
   "require": {
-    "carlonicora/minimalism": "~12.1",
-    "twig/twig":"~3.0"
+    "carlonicora/jsonapi": "~3.0",
+    "carlonicora/minimalism": "~13.0",
+    "twig/twig":"~3.2"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master"

@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\Twig;
 
 use CarloNicora\JsonApi\Document;
-use CarloNicora\Minimalism\Interfaces\ServiceInterface;
+use CarloNicora\Minimalism\Abstracts\AbstractService;
 use CarloNicora\Minimalism\Interfaces\TransformerInterface;
 use CarloNicora\Minimalism\Services\Path;
 use Exception;
@@ -10,7 +10,7 @@ use RuntimeException;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class Twig implements ServiceInterface, TransformerInterface
+class Twig extends AbstractService implements TransformerInterface
 {
     /** @var string  */
     private string $twigCache;
@@ -22,13 +22,15 @@ class Twig implements ServiceInterface, TransformerInterface
     public function __construct(
         private Path $path
     ) {
+        parent::__construct();
+
         $this->twigCache = $this->path->getRoot()
             . DIRECTORY_SEPARATOR . 'cache'
             . DIRECTORY_SEPARATOR . 'twig';
 
         $defaultMask = umask(0);
 
-        if (!file_exists($this->twigCache) && !mkdir($this->twigCache, 0777) && !is_dir($this->twigCache)) {
+        if (!is_dir($this->twigCache) && !mkdir($this->twigCache) && !is_dir($this->twigCache)) {
             throw new RuntimeException('Cannot create twig cache directory', 500);
         }
         umask($defaultMask);
@@ -36,14 +38,13 @@ class Twig implements ServiceInterface, TransformerInterface
     }
 
     /**
-     *
+     * @return string|null
      */
-    public function initialise(): void {}
-
-    /**
-     *
-     */
-    public function destroy(): void {}
+    public static function getBaseInterface(
+    ): ?string
+    {
+        return TransformerInterface::class;
+    }
 
     /**
      * @param Document $document
@@ -67,8 +68,8 @@ class Twig implements ServiceInterface, TransformerInterface
         $twig = new Environment($twigLoader, [
             'cache' => $this->twigCache,
         ]);
-        $template = $twig->load($viewFile . '.twig');
-        return $template->render($document->prepare());
+
+        return $twig->load($viewFile . '.twig')->render($document->prepare());
     }
 
     /**
