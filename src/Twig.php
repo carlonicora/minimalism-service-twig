@@ -5,6 +5,7 @@ use CarloNicora\JsonApi\Document;
 use CarloNicora\Minimalism\Abstracts\AbstractService;
 use CarloNicora\Minimalism\Interfaces\TransformerInterface;
 use CarloNicora\Minimalism\Services\Path;
+use CarloNicora\Minimalism\Services\Twig\Extensions\JsonApiExtension;
 use Exception;
 use RuntimeException;
 use Twig\Environment;
@@ -68,6 +69,7 @@ class Twig extends AbstractService implements TransformerInterface
         $twig = new Environment($twigLoader, [
             'cache' => $this->twigCache,
         ]);
+        $twig->addExtension(new JsonApiExtension());
 
         return $twig->load($viewFile . '.twig')->render($document->prepare());
     }
