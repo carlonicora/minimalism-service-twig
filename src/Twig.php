@@ -19,9 +19,11 @@ class Twig extends AbstractService implements TransformerInterface
     /**
      * Twig constructor.
      * @param Path $path
+     * @param bool $MINIMALISM_SERVICE_TWIG_USE_CACHE
      */
     public function __construct(
-        private Path $path
+        private Path $path,
+        private bool $MINIMALISM_SERVICE_TWIG_USE_CACHE=true,
     ) {
         parent::__construct();
 
@@ -65,10 +67,14 @@ class Twig extends AbstractService implements TransformerInterface
             $paths[] = $additionalPaths;
         }
 
+        $options = [];
+
+        if ($this->MINIMALISM_SERVICE_TWIG_USE_CACHE){
+            $options['cache'] = $this->twigCache;
+        }
+
         $twigLoader = new FilesystemLoader($paths);
-        $twig = new Environment($twigLoader, [
-            'cache' => $this->twigCache,
-        ]);
+        $twig = new Environment($twigLoader, $options);
         $twig->addExtension(new JsonApiExtension());
 
         return $twig->load($viewFile . '.twig')->render($document->prepare());
