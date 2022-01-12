@@ -25,8 +25,6 @@ class Twig extends AbstractService implements TransformerInterface
         private Path $path,
         private bool $MINIMALISM_SERVICE_TWIG_USE_CACHE=true,
     ) {
-        parent::__construct();
-
         $this->twigCache = $this->path->getRoot()
             . DIRECTORY_SEPARATOR . 'cache'
             . DIRECTORY_SEPARATOR . 'twig';
