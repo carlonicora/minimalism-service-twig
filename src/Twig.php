@@ -9,6 +9,7 @@ use CarloNicora\Minimalism\Services\Twig\Extensions\JsonApiExtension;
 use Exception;
 use nadar\quill\Lexer;
 use RuntimeException;
+use Throwable;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFilter;
@@ -87,8 +88,8 @@ class Twig extends AbstractService implements TransformerInterface
             $lexer = new Lexer($value);
             try {
                 $response = $lexer->render();
-            } catch (Exception) {
-                $response = '';
+            } catch (Exception|Throwable) {
+                $response = $value;
             }
 
             return $response;
